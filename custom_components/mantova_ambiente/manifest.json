@@ -1,0 +1,11 @@
+{
+  "domain": "mantova_ambiente",
+  "name": "Mantova Ambiente",
+  "codeowners": [],
+  "config_flow": true,
+  "documentation": "https://www.mantovaambiente.it/",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "version": "0.1.0"
+}

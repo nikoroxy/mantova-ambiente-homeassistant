@@ -1,0 +1,34 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Zona gia configurata",
+      "cannot_connect": "Impossibile caricare l'elenco delle zone"
+    },
+    "step": {
+      "user": {
+        "title": "Mantova Ambiente",
+        "description": "Scegli la zona di raccolta.",
+        "data": {
+          "instance_name": "Nome abitazione",
+          "zone_id": "Zona"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "next_collection_date": {
+        "name": "Prossima data raccolta"
+      },
+      "next_collection_types": {
+        "name": "Prossimi rifiuti"
+      },
+      "today_collection_types": {
+        "name": "Rifiuti di oggi"
+      },
+      "tomorrow_collection_types": {
+        "name": "Rifiuti di domani"
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Zone already configured",
+      "cannot_connect": "Unable to load zones"
+    },
+    "step": {
+      "user": {
+        "title": "Mantova Ambiente",
+        "description": "Choose the collection zone.",
+        "data": {
+          "instance_name": "Home name",
+          "zone_id": "Zone"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "today": {
+        "name": "Collection today"
+      },
+      "tomorrow": {
+        "name": "Collection tomorrow"
+      }
+    },
+    "sensor": {
+      "next_collection_date": {
+        "name": "Next collection date"
+      },
+      "next_collection_types": {
+        "name": "Next waste types"
+      },
+      "today_collection_types": {
+        "name": "Today's waste types"
+      },
+      "tomorrow_collection_types": {
+        "name": "Tomorrow's waste types"
+      }
+    }
+  }
+}
