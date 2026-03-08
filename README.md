@@ -8,6 +8,8 @@ Funzioni principali:
 - supporto a più istanze, anche sulla stessa zona
 - sensori per prossima raccolta, raccolte di oggi e domani e prossima data per ogni frazione
 - binary sensor per sapere se una frazione viene raccolta oggi o domani
+- entità diagnostica con timestamp dell'ultimo aggiornamento riuscito
+- notifica persistente in Home Assistant se la sincronizzazione con il server fallisce
 
 Installazione con HACS:
 

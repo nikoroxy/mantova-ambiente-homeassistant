@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime
 import re
 from typing import Any, Callable
 
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity, SensorEntityDescription
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
@@ -40,6 +41,13 @@ def _types_value(data: dict[str, Any], key: str) -> str | None:
         return None
     values = data["schedule"].get(day, [])
     return ", ".join(values) if values else None
+
+
+def _datetime_value(data: dict[str, Any], key: str) -> datetime | None:
+    value = data.get(key)
+    if not isinstance(value, datetime):
+        return None
+    return value
 
 
 def _device_info(coordinator: MantovaAmbienteDataUpdateCoordinator) -> dict[str, Any]:
@@ -85,6 +93,16 @@ SENSORS: tuple[MantovaAmbienteSensorEntityDescription, ...] = (
         value_fn=lambda data: _types_value(data, "tomorrow"),
         attrs_fn=lambda data: {
             "date": data.get("tomorrow"),
+        },
+    ),
+    MantovaAmbienteSensorEntityDescription(
+        key="last_update",
+        translation_key="last_update",
+        device_class=SensorDeviceClass.TIMESTAMP,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        value_fn=lambda data: _datetime_value(data, "last_update"),
+        attrs_fn=lambda data: {
+            "zone": data.get("zone_title"),
         },
     ),
 )

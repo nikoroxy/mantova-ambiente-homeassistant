@@ -1,15 +1,16 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import logging
 from typing import Any
 
+from homeassistant.components import persistent_notification
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .api import MantovaAmbienteApi, MantovaAmbienteApiError
-from .const import UPDATE_INTERVAL
+from .const import DOMAIN, UPDATE_INTERVAL
 
 LOGGER = logging.getLogger(__name__)
 
@@ -35,12 +36,24 @@ class MantovaAmbienteDataUpdateCoordinator(DataUpdateCoordinator[dict[str, Any]]
         self.instance_name = instance_name
         self.zone_id = zone_id
         self.zone_title = zone_title
+        self._notification_id = f"{DOMAIN}_{entry_id}_sync_error"
 
     async def _async_update_data(self) -> dict[str, Any]:
         try:
             recyclings = await self.api.async_get_recyclings(self.zone_id)
         except MantovaAmbienteApiError as err:
+            persistent_notification.async_create(
+                self.hass,
+                (
+                    f"Ultimo tentativo di sincronizzazione fallito per '{self.instance_name}' "
+                    f"({self.zone_title}).\n\nErrore: {err}"
+                ),
+                title="Mantova Ambiente - errore sincronizzazione",
+                notification_id=self._notification_id,
+            )
             raise UpdateFailed(err) from err
+
+        persistent_notification.async_dismiss(self.hass, self._notification_id)
 
         schedule: dict[str, list[str]] = defaultdict(list)
         next_dates_by_type: dict[str, str] = {}
@@ -95,6 +108,7 @@ class MantovaAmbienteDataUpdateCoordinator(DataUpdateCoordinator[dict[str, Any]]
             "schedule": dict(schedule),
             "next_dates_by_type": next_dates_by_type,
             "next_date": next_date,
+            "last_update": datetime.now(timezone.utc),
             "today": today,
             "tomorrow": tomorrow,
             "raw_items": raw_items,

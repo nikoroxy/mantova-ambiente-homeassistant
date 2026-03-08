@@ -25,6 +25,9 @@
       }
     },
     "sensor": {
+      "last_update": {
+        "name": "Last update"
+      },
       "next_collection_date": {
         "name": "Next collection date"
       },
