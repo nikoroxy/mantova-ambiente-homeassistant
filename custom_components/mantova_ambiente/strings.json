@@ -16,6 +16,14 @@
     }
   },
   "entity": {
+    "binary_sensor": {
+      "today": {
+        "name": "Raccolta oggi"
+      },
+      "tomorrow": {
+        "name": "Raccolta domani"
+      }
+    },
     "sensor": {
       "next_collection_date": {
         "name": "Prossima data raccolta"

@@ -5,8 +5,8 @@ Integrazione custom per Home Assistant che espone il calendario di raccolta rifi
 Funzioni principali:
 
 - configurazione da interfaccia con scelta zona
-- supporto a piu istanze, anche sulla stessa zona
-- sensori per prossima raccolta, raccolte di oggi e domani, e prossima data per ogni frazione
+- supporto a più istanze, anche sulla stessa zona
+- sensori per prossima raccolta, raccolte di oggi e domani e prossima data per ogni frazione
 - binary sensor per sapere se una frazione viene raccolta oggi o domani
 
 Installazione con HACS:
@@ -18,6 +18,6 @@ Installazione con HACS:
 
 Note:
 
-- Questo progetto e` non ufficiale e non e` affiliato, approvato o mantenuto da TEA S.p.A., Mantova Ambiente o societa` collegate.
+- Questo progetto è non ufficiale e non è affiliato, approvato o mantenuto da TEA S.p.A., Mantova Ambiente o società collegate.
 - I calendari di raccolta possono cambiare. Verifica sempre le informazioni importanti tramite i canali ufficiali di Mantova Ambiente.
-- Il software e` fornito cosi com'e`, senza garanzie. L'utente e` responsabile di notifiche, automazioni e conseguenze derivanti dall'uso dell'integrazione.
+- Il software è fornito così com'è, senza garanzie. L'utente è responsabile di notifiche, automazioni e conseguenze derivanti dall'uso dell'integrazione.
